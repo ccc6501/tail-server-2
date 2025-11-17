@@ -27,7 +27,7 @@ class ServerTrayApp:
         self.project_root = Path(__file__).resolve().parent
         self.codespace = os.getenv("CODESPACE_MODE", "false").lower() in ("true", "1", "yes")
         self.host = "0.0.0.0" if self.codespace else "127.0.0.1"
-        self.port = int(os.getenv("PORT", "8000" if self.codespace else "8088"))
+        self.port = int(os.getenv("PORT", "8000" if self.codespace else "8089"))
         self.url = f"http://{self.host if self.host != '0.0.0.0' else 'localhost'}:{self.port}"
 
     def create_icon_image(self) -> Image.Image:

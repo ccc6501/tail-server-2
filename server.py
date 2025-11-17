@@ -54,13 +54,13 @@ DEFAULT_OPENAI_MODEL_IDS: List[str] = [
     "o3-mini",
 ]
 
-DEFAULT_CLOUD_STORAGE_PATH = Settings().cloud_storage_path
+DEFAULT_CLOUD_STORAGE_PATH = os.getenv("CLOUD_STORAGE_PATH", str(Path("D:/TheCloud")))
 
 
 def _build_tailscale_health_url(value: str) -> str:
     """
     Accepts either a raw IP/hostname or a fully-qualified URL. Automatically
-    appends /health and default port 8088 when omitted.
+    appends /health and default port 8089 when omitted.
     """
     if not value:
         return ""
@@ -77,9 +77,9 @@ def _build_tailscale_health_url(value: str) -> str:
     if ":" in host_port:
         host, port = host_port.split(":", 1)
     else:
-        host, port = host_port, "8088"
+        host, port = host_port, "8089"
     host = host.strip()
-    port = port.strip() or "8088"
+    port = port.strip() or "8089"
     if not host:
         return ""
     if not path.startswith("/"):
@@ -685,7 +685,7 @@ def generate_qr_image(data: str) -> Response:
     qr.make(fit=True)
     img = qr.make_image(fill_color="black", back_color="white")
     buffer = io.BytesIO()
-    img.save(buffer, format="PNG")
+    img.save(buffer, "PNG")
     buffer.seek(0)
     return Response(content=buffer.getvalue(), media_type="image/png")
 
