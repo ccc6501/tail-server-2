@@ -1,17 +1,14 @@
 {
   "name": "tail-server",
   "version": "1.0.0",
-  "main": "admin_panel.js",
+  "description": "AI Control Center",
+  "main": "server.py",
   "scripts": {
-    "build:css": "tailwindcss -i ./frontend/styles.css -o ./static/app.css --minify",
-    "build:js": "babel frontend/app.jsx --presets=@babel/preset-react --out-file static/app.js",
-    "build": "npm run build:css && npm run build:js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "python server.py",
+    "build": "echo 'No build step required for Python backend'",
+    "dev": "python server.py"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
+  "dependencies": {},
   "devDependencies": {
     "@babel/cli": "^7.28.3",
     "@babel/core": "^7.28.5",
@@ -19,5 +16,12 @@
     "autoprefixer": "^10.4.22",
     "postcss": "^8.5.6",
     "tailwindcss": "^3.4.14"
-  }
+  },
+  "keywords": [
+    "ai",
+    "server",
+    "tailscale"
+  ],
+  "author": "",
+  "license": "ISC"
 }

@@ -23,4 +23,7 @@ def log_event(message: str) -> None:
 
 def log_error(message: str) -> None:
     """Log an error message."""
-    _write_log("ERROR", message)
+    try:
+        _write_log("ERROR", message)
+    except Exception as e:
+        print(f"Failed to log error: {e}")

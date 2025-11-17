@@ -1,9 +1,10 @@
 {
-  "openai_key": "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",
-  "openai_model": "gpt-4o-mini",
+  "openai_key": "",
+  "openai_model": "gpt-3.5-turbo",
   "ollama_url": "http://localhost:11434",
-  "ollama_model": "llama3.1:8b",
+  "ollama_model": "llama3.2:3b",
   "remote_url": "",
-  "tailscale_ip": "100.88.23.90",
-  "system_instructions": ""
+  "system_instructions": "You are a helpful AI assistant.",
+  "tailscale_ip": "",
+  "cloud_storage_path": "./TheCloud"
 }

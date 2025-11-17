@@ -51,16 +51,22 @@ class ServerTrayApp:
         """Run npm build to ensure the latest React bundle is available."""
         package_json = self.project_root / "package.json"
         if not package_json.exists():
-            return True
+            print("Warning: package.json not found. Skipping frontend build.")
+            return False
         print("Building admin panel bundle with npm...")
         try:
+            # Check if npm is installed
+            subprocess.run(["npm", "--version"], check=True, capture_output=True)
             result = subprocess.run(
                 ["npm", "run", "build"],
                 cwd=str(self.project_root),
                 check=False,
             )
         except FileNotFoundError:
-            print("npm command not found; skipping frontend build.")
+            print("npm command not found; install Node.js and npm. Skipping frontend build.")
+            return False
+        except subprocess.CalledProcessError:
+            print("npm version check failed. Skipping frontend build.")
             return False
         if result.returncode != 0:
             print("npm run build failed. Using the previous bundle.")
