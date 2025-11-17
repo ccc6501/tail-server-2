@@ -1,0 +1,113 @@
+{
+  "profile": {
+    "name": "",
+    "handle": "",
+    "email": "",
+    "deviceId": "",
+    "role": ""
+  },
+  "users": [
+    {
+      "id": 1,
+      "name": "chance",
+      "handle": "@chance",
+      "email": "ccc6501@gmail.com",
+      "role": "admin",
+      "status": "online",
+      "lastSeen": "Just now",
+      "joined": "2025-11-17",
+      "devices": 0,
+      "aiUsage": 0,
+      "storageUsed": 0.0
+    }
+  ],
+  "systemSettings": {
+    "allowRegistration": true,
+    "requireEmailVerification": false,
+    "aiRateLimit": 270,
+    "storagePerUser": 55,
+    "maxDevicesPerUser": 0,
+    "sessionTimeout": 0,
+    "enableBackups": false,
+    "backupFrequency": "manual",
+    "maintenanceMode": false,
+    "debugMode": false
+  },
+  "invites": [
+    {
+      "id": 1,
+      "code": "INV-2025-LBUG",
+      "createdBy": "",
+      "uses": 0,
+      "maxUses": 5,
+      "expiresAt": "2026-01-01",
+      "status": "active"
+    }
+  ],
+  "logs": [
+    {
+      "id": 8,
+      "timestamp": "2025-11-17 12:01:53",
+      "user": "system",
+      "action": "System settings updated",
+      "ip": "localhost",
+      "status": "success"
+    },
+    {
+      "id": 7,
+      "timestamp": "2025-11-17 11:01:37",
+      "user": "@chance",
+      "action": "User updated: @chance",
+      "ip": "localhost",
+      "status": "success"
+    },
+    {
+      "id": 6,
+      "timestamp": "2025-11-17 11:01:36",
+      "user": "@chance",
+      "action": "User updated: @chance",
+      "ip": "localhost",
+      "status": "success"
+    },
+    {
+      "id": 5,
+      "timestamp": "2025-11-17 10:55:43",
+      "user": "system",
+      "action": "Invite created: INV-2025-LBUG",
+      "ip": "localhost",
+      "status": "success"
+    },
+    {
+      "id": 4,
+      "timestamp": "2025-11-17 10:55:14",
+      "user": "system",
+      "action": "System settings updated",
+      "ip": "localhost",
+      "status": "success"
+    },
+    {
+      "id": 3,
+      "timestamp": "2025-11-17 10:55:13",
+      "user": "system",
+      "action": "System settings updated",
+      "ip": "localhost",
+      "status": "success"
+    },
+    {
+      "id": 2,
+      "timestamp": "2025-11-17 10:41:36",
+      "user": "@chance",
+      "action": "User created: @chance",
+      "ip": "localhost",
+      "status": "success"
+    },
+    {
+      "id": 1,
+      "timestamp": "2025-11-17 10:40:31",
+      "user": "system",
+      "action": "System settings updated",
+      "ip": "localhost",
+      "status": "success"
+    }
+  ]
+}

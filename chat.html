@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>The Local AI Chat</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #111;
+            color: #f0f0f0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow: hidden;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background-color: #222;
+            border-bottom: 1px solid #333;
+        }
+        #title {
+            font-size: 1.2rem;
+        }
+        #statusArea {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        #statusIndicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: red;
+        }
+        #engineIndicator {
+            font-size: 0.9rem;
+        }
+        #burger {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        main {
+            flex: 1;
+            display: flex;
+            overflow: hidden;
+        }
+        #sidebar {
+            width: 300px;
+            background-color: #1c1c1c;
+            border-right: 1px solid #333;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+        #drawer {
+            position: fixed;
+            top: 0;
+            right: -320px;
+            width: 300px;
+            height: 100%;
+            background-color: #1c1c1c;
+            border-left: 1px solid #333;
+            transition: right 0.3s ease;
+            padding: 10px;
+            box-sizing: border-box;
+            z-index: 100;
+        }
+        #drawer.open {
+            right: 0;
+        }
+        #log {
+            flex: 1;
+            padding: 10px;
+            overflow-y: auto;
+            font-size: 0.95rem;
+        }
+        #inputArea {
+            padding: 10px;
+            border-top: 1px solid #333;
+            display: flex;
+            gap: 8px;
+            background-color: #222;
+        }
+        textarea#msg {
+            flex: 1;
+            resize: vertical;
+            min-height: 60px;
+            max-height: 150px;
+            background-color: #333;
+            color: #f0f0f0;
+            border: 1px solid #444;
+            padding: 8px;
+            font-size: 1rem;
+        }
+        button {
+            padding: 8px 12px;
+            background-color: #444;
+            border: 1px solid #555;
+            color: #fff;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #555;
+        }
+        .sectionTitle {
+            font-weight: bold;
+            margin-top: 12px;
+        }
+        .field {
+            margin-bottom: 10px;
+            display: flex;
+            flex-direction: column;
+        }
+        .field label {
+            margin-bottom: 4px;
+            font-size: 0.85rem;
+        }
+        .field input,
+        .field select,
+        .field textarea {
+            padding: 6px;
+            border: 1px solid #444;
+            background-color: #333;
+            color: #f0f0f0;
+            font-size: 0.9rem;
+        }
+        #remoteContainer {
+            margin-top: 12px;
+            padding: 8px;
+            border: 1px solid #444;
+            background-color: #222;
+        }
+        #remoteQR {
+            margin-top: 8px;
+        }
+        /* Hide sidebar on mobile */
+        @media (max-width: 700px) {
+            #sidebar {
+                display: none;
+            }
+            #burger {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div id="burger" onclick="toggleDrawer()">☰</div>
+        <div id="title">The Local Chat</div>
+        <div id="statusArea">
+            <div id="statusIndicator"></div>
+            <div id="engineIndicator">Engine: openai</div>
+            <button id="settingsButton" onclick="toggleSettings()">Settings</button>
+        </div>
+    </header>
+    <main>
+        <div id="sidebar">
+            <!-- Sidebar contents: settings and diagnostics for PC view -->
+            <div id="sidebarContent"></div>
+        </div>
+        <div id="drawer">
+            <div id="drawerContent"></div>
+        </div>
+        <div id="chatPane" style="flex:1; display:flex; flex-direction:column;">
+            <div id="log"></div>
+            <div id="remoteDisplay"></div>
+            <div id="inputArea">
+                <textarea id="msg" placeholder="Type your message..."></textarea>
+                <button onclick="sendMessage()">Send</button>
+                <button onclick="toggleEngine()">Switch Engine</button>
+            </div>
+        </div>
+    </main>
+    <script>
+    let engine = 'openai';
+    let drawerOpen = false;
+    let settingsMode = false;
+
+    // Helper to log a message to the chat log
+    function logMessage(role, text) {
+        const log = document.getElementById('log');
+        const p = document.createElement('p');
+        p.innerHTML = `<strong>${role}:</strong> ${text}`;
+        log.appendChild(p);
+        log.scrollTop = log.scrollHeight;
+    }
+
+    async function sendMessage() {
+        const input = document.getElementById('msg');
+        const message = input.value.trim();
+        if (!message) return;
+        logMessage('You', message);
+        input.value = '';
+        let url = engine === 'openai' ? '/api/openai' : '/api/ollama';
+        try {
+            const resp = await fetch(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ message })
+            });
+            if (!resp.ok) {
+                const err = await resp.json();
+                logMessage(engine, `Error: ${err.detail || 'Unknown error'}`);
+                return;
+            }
+            const data = await resp.json();
+            logMessage(engine, data.reply);
+        } catch (e) {
+            logMessage(engine, 'Error contacting server');
+        }
+    }
+
+    function toggleEngine() {
+        engine = engine === 'openai' ? 'ollama' : 'openai';
+        document.getElementById('engineIndicator').innerText = 'Engine: ' + engine;
+    }
+
+    async function updateStatus() {
+        try {
+            const resp = await fetch('/health');
+            const ok = resp.ok;
+            const indicator = document.getElementById('statusIndicator');
+            indicator.style.backgroundColor = ok ? '#0f0' : '#f00';
+        } catch (e) {
+            document.getElementById('statusIndicator').style.backgroundColor = '#f00';
+        }
+    }
+
+    // Settings form generation
+    async function buildSettingsPanel(containerId) {
+        const container = document.getElementById(containerId);
+        container.innerHTML = '';
+        // Fetch current settings
+        let settings = {};
+        try {
+            const resp = await fetch('/api/settings');
+            settings = await resp.json();
+        } catch (e) {
+            logMessage('System', 'Failed to fetch settings');
+        }
+        // Fetch model lists
+        let openaiModels = [];
+        if (settings.openai_key) {
+            try {
+                const resp = await fetch('/api/models/openai');
+                if (resp.ok) {
+                    const data = await resp.json();
+                    if (data && data.data) {
+                        openaiModels = data.data.map(m => m.id);
+                    }
+                }
+            } catch (e) {
+                console.error('Error fetching OpenAI models');
+            }
+        }
+        let ollamaModels = [];
+        if (settings.ollama_url) {
+            try {
+                const resp = await fetch('/api/models/ollama');
+                if (resp.ok) {
+                    const data = await resp.json();
+                    if (data && data.models) {
+                        ollamaModels = data.models.map(m => m.name);
+                    }
+                }
+            } catch (e) {
+                console.error('Error fetching Ollama models');
+            }
+        }
+        const form = document.createElement('div');
+        form.innerHTML = `
+            <div class="field">
+                <label>OpenAI API Key</label>
+                <input type="text" id="setOpenAIKey" value="${settings.openai_key || ''}" />
+            </div>
+            <div class="field">
+                <label>OpenAI Model</label>
+                <select id="setOpenAIModel">
+                    ${openaiModels.map(m => `<option value="${m}" ${m === settings.openai_model ? 'selected' : ''}>${m}</option>`).join('')}
+                </select>
+            </div>
+            <div class="field">
+                <label>Ollama URL</label>
+                <input type="text" id="setOllamaURL" value="${settings.ollama_url || ''}" />
+            </div>
+            <div class="field">
+                <label>Ollama Model</label>
+                <select id="setOllamaModel">
+                    ${ollamaModels.map(m => `<option value="${m}" ${m === settings.ollama_model ? 'selected' : ''}>${m}</option>`).join('')}
+                </select>
+            </div>
+            <div class="field">
+                <label>Remote URL</label>
+                <input type="text" id="setRemoteURL" value="${settings.remote_url || ''}" />
+            </div>
+            <div class="field">
+                <label>System Instructions</label>
+                <textarea id="setInstructions" rows="5">${settings.system_instructions || ''}</textarea>
+            </div>
+            <button id="saveSettingsBtn">Save Settings</button>
+        `;
+        container.appendChild(form);
+        document.getElementById('saveSettingsBtn').onclick = saveSettings;
+    }
+
+    async function saveSettings() {
+        const body = {
+            openai_key: document.getElementById('setOpenAIKey').value,
+            openai_model: document.getElementById('setOpenAIModel').value,
+            ollama_url: document.getElementById('setOllamaURL').value,
+            ollama_model: document.getElementById('setOllamaModel').value,
+            remote_url: document.getElementById('setRemoteURL').value,
+            system_instructions: document.getElementById('setInstructions').value,
+        };
+        try {
+            const resp = await fetch('/api/settings', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(body)
+            });
+            if (resp.ok) {
+                logMessage('System', 'Settings updated');
+                await updateRemoteDisplay();
+            } else {
+                const err = await resp.json();
+                logMessage('System', `Settings update failed: ${err.detail || 'Unknown error'}`);
+            }
+        } catch (e) {
+            logMessage('System', 'Error updating settings');
+        }
+    }
+
+    async function updateRemoteDisplay() {
+        // Get current remote_url and show with QR code
+        let remote = '';
+        try {
+            const resp = await fetch('/api/settings');
+            const data = await resp.json();
+            remote = data.remote_url || '';
+        } catch (e) {
+            console.error('Failed to fetch settings for remote display');
+        }
+        const container = document.getElementById('remoteDisplay');
+        container.innerHTML = '';
+        if (remote) {
+            const div = document.createElement('div');
+            div.id = 'remoteContainer';
+            div.innerHTML = `<div><strong>Remote URL:</strong> <a href="${remote}" target="_blank" style="color:#0af">${remote}</a></div>`;
+            const qr = document.createElement('img');
+            const encoded = encodeURIComponent(remote);
+            // Use Google Chart API to generate QR code
+            qr.src = `https://chart.googleapis.com/chart?cht=qr&chs=180x180&chl=${encoded}`;
+            qr.alt = 'QR Code';
+            qr.id = 'remoteQR';
+            div.appendChild(qr);
+            container.appendChild(div);
+        }
+    }
+
+    function toggleDrawer() {
+        drawerOpen = !drawerOpen;
+        const drawer = document.getElementById('drawer');
+        if (drawerOpen) {
+            drawer.classList.add('open');
+            buildSettingsPanel('drawerContent');
+        } else {
+            drawer.classList.remove('open');
+        }
+    }
+
+    function toggleSettings() {
+        // On PC, toggle sidebar
+        const sidebar = document.getElementById('sidebar');
+        if (window.innerWidth > 700) {
+            if (sidebar.style.display === 'none' || !sidebar.style.display) {
+                sidebar.style.display = 'block';
+                buildSettingsPanel('sidebarContent');
+            } else {
+                sidebar.style.display = 'none';
+            }
+        } else {
+            // On mobile, open drawer
+            toggleDrawer();
+        }
+    }
+
+    // Periodically update status indicator
+    setInterval(updateStatus, 5000);
+    updateStatus();
+    updateRemoteDisplay();
+
+    // Auto-close drawer on resize back to PC view
+    window.addEventListener('resize', () => {
+        if (window.innerWidth > 700) {
+            const drawer = document.getElementById('drawer');
+            drawer.classList.remove('open');
+        }
+    });
+    </script>
+</body>
+</html>

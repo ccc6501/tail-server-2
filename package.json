@@ -1,0 +1,23 @@
+{
+  "name": "tail-server",
+  "version": "1.0.0",
+  "main": "admin_panel.js",
+  "scripts": {
+    "build:css": "tailwindcss -i ./frontend/styles.css -o ./static/app.css --minify",
+    "build:js": "babel frontend/app.jsx --presets=@babel/preset-react --out-file static/app.js",
+    "build": "npm run build:css && npm run build:js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@babel/cli": "^7.28.3",
+    "@babel/core": "^7.28.5",
+    "@babel/preset-react": "^7.28.5",
+    "autoprefixer": "^10.4.22",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^3.4.14"
+  }
+}

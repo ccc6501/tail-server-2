@@ -1,0 +1,98 @@
+[2025-11-17T02:33:00.388808] EVENT: Tailscale IP updated to: 100.88.23.90
+[2025-11-17T02:33:49.352994] EVENT: Setting openai_key updated to: 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
+[2025-11-17T02:33:49.354004] EVENT: Setting openai_model updated to: gpt-4o-mini
+[2025-11-17T02:33:49.355006] EVENT: Setting ollama_url updated to: http://localhost:11434
+[2025-11-17T02:33:49.355006] EVENT: Setting ollama_model updated to: llama3.1:latest
+[2025-11-17T02:33:49.356004] EVENT: Setting remote_url updated to: 
+[2025-11-17T02:33:49.356004] EVENT: Setting system_instructions updated to: 
+[2025-11-17T02:37:51.586856] EVENT: Tailscale IP updated to: 100.88.23.90
+[2025-11-17T02:41:17.199155] EVENT: Setting openai_key updated to: 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
+[2025-11-17T02:41:17.200548] EVENT: Setting openai_model updated to: gpt-3.5-turbo
+[2025-11-17T02:41:17.200548] EVENT: Setting ollama_url updated to: http://localhost:11434
+[2025-11-17T02:41:17.202055] EVENT: Setting ollama_model updated to: llama3.1:latest
+[2025-11-17T02:41:17.202625] EVENT: Setting remote_url updated to: 
+[2025-11-17T02:41:17.202625] EVENT: Setting system_instructions updated to: 
+[2025-11-17T02:41:25.845408] EVENT: OpenAI reply: Hello! How can I assist you today?
+[2025-11-17T02:41:46.443884] ERROR: Ollama response parsing error: Extra data: line 2 column 1 (char 101)
+[2025-11-17T02:42:31.630225] EVENT: Setting openai_key updated to: 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
+[2025-11-17T02:42:31.630225] EVENT: Setting openai_model updated to: gpt-3.5-turbo
+[2025-11-17T02:42:31.631333] EVENT: Setting ollama_url updated to: http://localhost:11434
+[2025-11-17T02:42:31.631333] EVENT: Setting ollama_model updated to: qwen3:14b
+[2025-11-17T02:42:31.631333] EVENT: Setting remote_url updated to: 
+[2025-11-17T02:42:31.632337] EVENT: Setting system_instructions updated to: 
+[2025-11-17T03:12:17.581828] EVENT: Tailscale IP updated to: 100.88.23.90
+[2025-11-17T03:15:12.191344] ERROR: Ollama response parsing error: Extra data: line 2 column 1 (char 93)
+[2025-11-17T03:15:13.630618] EVENT: OpenAI reply: Hey, what's up? How can I assist you today?
+[2025-11-17T03:15:13.636186] EVENT: Setting openai_key updated to: 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
+[2025-11-17T03:15:13.637193] EVENT: Setting openai_model updated to: gpt-3.5-turbo
+[2025-11-17T03:15:13.637193] EVENT: Setting ollama_url updated to: http://localhost:11434
+[2025-11-17T03:15:13.637193] EVENT: Setting ollama_model updated to: qwen3:14b
+[2025-11-17T03:15:13.638524] EVENT: Setting remote_url updated to: 
+[2025-11-17T03:15:13.638524] EVENT: Setting system_instructions updated to: 
+[2025-11-17T10:38:28.225651] EVENT: Tailscale IP updated to: 100.88.23.90
+[2025-11-17T10:38:58.858334] EVENT: Setting openai_key updated to: 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
+[2025-11-17T10:38:58.858334] EVENT: Setting openai_model updated to: gpt-4o-mini
+[2025-11-17T10:38:58.859340] EVENT: Setting ollama_url updated to: http://localhost:11434
+[2025-11-17T10:38:58.859340] EVENT: Setting ollama_model updated to: llama3.1
+[2025-11-17T10:38:58.860341] EVENT: Setting remote_url updated to: 
+[2025-11-17T10:38:58.860341] EVENT: Setting system_instructions updated to: 
+[2025-11-17T10:39:18.604844] EVENT: OpenAI reply: Hello! How can I assist you today?
+[2025-11-17T10:39:33.352448] ERROR: Ollama API error: 500 {"error":"llama runner process has terminated: exit status 2"}
+[2025-11-17T10:39:50.774065] EVENT: Setting openai_key updated to: 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
+[2025-11-17T10:39:50.774065] EVENT: Setting openai_model updated to: gpt-4o-mini
+[2025-11-17T10:39:50.775067] EVENT: Setting ollama_url updated to: http://localhost:11434/v1
+[2025-11-17T10:39:50.775067] EVENT: Setting ollama_model updated to: phi3:latest
+[2025-11-17T10:39:50.776067] EVENT: Setting remote_url updated to: 
+[2025-11-17T10:39:50.776067] EVENT: Setting system_instructions updated to: 
+[2025-11-17T10:39:56.921178] ERROR: Ollama API error: 404 404 page not found
+[2025-11-17T10:40:00.626702] ERROR: Failed to fetch Ollama models: 404 404 page not found
+[2025-11-17T10:40:04.834019] EVENT: Setting openai_key updated to: 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
+[2025-11-17T10:40:04.835059] EVENT: Setting openai_model updated to: gpt-4o-mini
+[2025-11-17T10:40:04.835059] EVENT: Setting ollama_url updated to: http://localhost:11434
+[2025-11-17T10:40:04.835059] EVENT: Setting ollama_model updated to: phi3:latest
+[2025-11-17T10:40:04.835059] EVENT: Setting remote_url updated to: 
+[2025-11-17T10:40:04.836280] EVENT: Setting system_instructions updated to: 
+[2025-11-17T10:40:31.305443] EVENT: System settings updated via API
+[2025-11-17T10:40:45.291904] EVENT: Tailscale IP updated to: 100.88.23.90
+[2025-11-17T10:40:53.437436] EVENT: Tailscale IP updated to: 100.88.23.90
+[2025-11-17T10:41:36.521488] EVENT: User created via API: @chance
+[2025-11-17T10:42:09.375235] EVENT: Setting openai_key updated to: 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
+[2025-11-17T10:42:09.376233] EVENT: Setting openai_model updated to: gpt-4o-mini
+[2025-11-17T10:42:09.376780] EVENT: Setting ollama_url updated to: http://localhost:11434
+[2025-11-17T10:42:09.376780] EVENT: Setting ollama_model updated to: llama3.1:8b
+[2025-11-17T10:42:09.376780] EVENT: Setting remote_url updated to: 
+[2025-11-17T10:42:09.377821] EVENT: Setting system_instructions updated to: 
+[2025-11-17T10:42:23.507925] ERROR: Ollama response parsing error: Extra data: line 2 column 1 (char 98)
+[2025-11-17T10:42:34.496733] EVENT: Setting openai_key updated to: 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
+[2025-11-17T10:42:34.496733] EVENT: Setting openai_model updated to: gpt-4o-mini
+[2025-11-17T10:42:34.497981] EVENT: Setting ollama_url updated to: http://localhost:11434/v1
+[2025-11-17T10:42:34.497981] EVENT: Setting ollama_model updated to: llama3.1:8b
+[2025-11-17T10:42:34.497981] EVENT: Setting remote_url updated to: 
+[2025-11-17T10:42:34.497981] EVENT: Setting system_instructions updated to: 
+[2025-11-17T10:42:38.866310] ERROR: Ollama API error: 404 404 page not found
+[2025-11-17T10:42:42.795493] ERROR: Failed to fetch Ollama models: 404 404 page not found
+[2025-11-17T10:42:47.229970] EVENT: Setting openai_key updated to: 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
+[2025-11-17T10:42:47.230990] EVENT: Setting openai_model updated to: gpt-4o-mini
+[2025-11-17T10:42:47.231992] EVENT: Setting ollama_url updated to: http://localhost:11434/v1.1
+[2025-11-17T10:42:47.231992] EVENT: Setting ollama_model updated to: llama3.1:8b
+[2025-11-17T10:42:47.231992] EVENT: Setting remote_url updated to: 
+[2025-11-17T10:42:47.233497] EVENT: Setting system_instructions updated to: 
+[2025-11-17T10:42:51.738101] ERROR: Ollama API error: 404 404 page not found
+[2025-11-17T10:42:55.032720] ERROR: Failed to fetch Ollama models: 404 404 page not found
+[2025-11-17T10:43:03.624199] EVENT: Setting openai_key updated to: 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
+[2025-11-17T10:43:03.625200] EVENT: Setting openai_model updated to: gpt-4o-mini
+[2025-11-17T10:43:03.626202] EVENT: Setting ollama_url updated to: localhost:11434
+[2025-11-17T10:43:03.626202] EVENT: Setting ollama_model updated to: llama3.1:8b
+[2025-11-17T10:43:03.626202] EVENT: Setting remote_url updated to: 
+[2025-11-17T10:43:03.627227] EVENT: Setting system_instructions updated to: 
+[2025-11-17T10:43:07.679534] ERROR: Ollama request error: No connection adapters were found for 'localhost:11434/api/generate'
+[2025-11-17T10:55:13.617053] EVENT: System settings updated via API
+[2025-11-17T10:55:14.595922] EVENT: System settings updated via API
+[2025-11-17T10:55:43.264224] EVENT: Invite created: INV-2025-LBUG
+[2025-11-17T11:00:08.252916] EVENT: OpenAI reply: Hello! How can I assist you today?
+[2025-11-17T11:00:14.146795] ERROR: Ollama request error: No connection adapters were found for 'localhost:11434/api/generate'
+[2025-11-17T11:01:36.691902] EVENT: User 1 updated: {'status': 'suspended'}
+[2025-11-17T11:01:37.955477] EVENT: User 1 updated: {'status': 'online'}
+[2025-11-17T12:00:37.185524+00:00] EVENT: Tailscale IP updated to: 100.88.23.90
+[2025-11-17T12:01:15.745561+00:00] EVENT: Ollama reply: Hey! How's it going? Is there something I can help you with 
+[2025-11-17T12:01:53.377563+00:00] EVENT: System settings updated via API

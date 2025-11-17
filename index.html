@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Local - Admin Panel</title>
+  <link rel="stylesheet" href="/static/app.css" />
+</head>
+
+<body class="bg-gray-950 text-gray-200">
+  <div id="root"></div>
+  <script src="/static/vendor/react.production.min.js"></script>
+  <script src="/static/vendor/react-dom.production.min.js"></script>
+  <script>
+    window.react = window.React;
+    if (!window.React || !window.ReactDOM) {
+      const root = document.getElementById('root');
+      if (root) {
+        root.innerHTML = '<div style="padding:16px;font-family:system-ui;color:#f5f5f5;background:#111;">Failed to load the React runtime. Please refresh or verify that /static/vendor/react*.js are accessible.</div>';
+      }
+    }
+  </script>
+  <script>
+    (function () {
+      const root = document.getElementById('root');
+      if (!root) return;
+      const showError = message => {
+        const box = document.createElement('div');
+        box.style.cssText = 'margin:16px;padding:12px;border-radius:8px;background:#3a0d0d;color:#f9dcdc;font-family:system-ui,Segoe UI,Arial,sans-serif;';
+        box.textContent = message;
+        root.innerHTML = '';
+        root.appendChild(box);
+      };
+      window.addEventListener('error', event => {
+        showError(`Runtime error: ${event.message} (${event.filename}:${event.lineno})`);
+      });
+      window.addEventListener('unhandledrejection', event => {
+        const reason = event.reason && event.reason.message ? event.reason.message : event.reason;
+        showError(`Unhandled promise rejection: ${reason}`);
+      });
+    })();
+  </script>
+  <script crossorigin src="https://unpkg.com/lucide-react@0.292.0/dist/umd/lucide-react.min.js"></script>
+  <script src="/static/app.js"></script>
+</body>
+
+</html>
